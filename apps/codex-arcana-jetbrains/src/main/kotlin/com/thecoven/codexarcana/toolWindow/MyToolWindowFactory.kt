@@ -1,4 +1,4 @@
-package com.github.maxkless.codexarcana.toolWindow
+package com.thecoven.codexarcana.toolWindow
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -8,8 +8,8 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.github.maxkless.codexarcana.MyBundle
-import com.github.maxkless.codexarcana.services.MyProjectService
+import com.thecoven.codexarcana.MyBundle
+import com.thecoven.codexarcana.services.MyProjectService
 import javax.swing.JButton
 
 

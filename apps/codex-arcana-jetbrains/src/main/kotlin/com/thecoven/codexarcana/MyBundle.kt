@@ -1,4 +1,4 @@
-package com.github.maxkless.codexarcana
+package com.thecoven.codexarcana
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
