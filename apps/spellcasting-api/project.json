@@ -1,0 +1,58 @@
+{
+  "name": "spellcasting-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/spellcasting-api/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/spellcasting-api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/spellcasting-api/src/main.ts",
+        "tsConfig": "apps/spellcasting-api/tsconfig.app.json",
+        "assets": ["apps/spellcasting-api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "spellcasting-api:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "spellcasting-api:build:development"
+        },
+        "production": {
+          "buildTarget": "spellcasting-api:build:production"
+        }
+      }
+    }
+  }
+}
