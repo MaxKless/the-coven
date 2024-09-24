@@ -14,7 +14,7 @@
     ],
     "sharedGlobals": []
   },
-  "nxCloudId": "66f14d6c6777644d84f4f488",
+  "nxCloudId": "66f2d3ba163d10eb1ad9d7cd",
   "targetDefaults": {
     "@nx/esbuild:esbuild": {
       "cache": true,
@@ -23,18 +23,12 @@
     }
   },
   "plugins": [
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
     {
       "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      },
+      "options": { "targetName": "test" },
       "exclude": ["apps/spellcasting-api-e2e/**/*"]
     }
-  ]
+  ],
+  "nxCloudUrl": "https://staging.nx.app"
 }
