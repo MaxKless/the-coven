@@ -10,10 +10,10 @@
       "type": "extensionHost",
       "request": "launch",
       "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}/dist",
+        "--extensionDevelopmentPath=${workspaceFolder}/apps/codex-arcana-vscode/dist",
         "--disable-extensions"
       ],
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+      "outFiles": ["${workspaceFolder}/apps/codex-arcana-vscode/dist/**/*.js"]
     }
   ]
 }
