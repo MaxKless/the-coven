@@ -14,8 +14,7 @@ This Nx workspace is organized into the following apps and libraries:
 .
 ├── apps
 │   ├── spell-playground        # React.js client application
-│   ├── spellcasting-api        # Express.js API server
-│   └── spellcasting-api-e2e    # E2E tests for the API
+│   └── spellcasting-api        # Express.js API server   
 ├── libs
 │   ├── shared
 │   │   ├── util-interface      # Shared TypeScript interfaces and types
