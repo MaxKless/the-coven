@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Recipe } from '@the-coven/util-interface';
 import { castSpellFromRecipe } from './spellCasting';
 import Toast from './toast/Toast';
+import CustomSpellCreator from './custom-spell-creator/custom-spell-creator';
 import styles from './app.module.css';
 
 const App: React.FC = () => {
@@ -60,7 +61,7 @@ const App: React.FC = () => {
       <div className={styles.spellList}>
         <div className={styles.spellListContainer}>
           <h2>Recipes</h2>
-          <ul>
+          <ul className={styles.recipeItemList}>
             {recipes.map((recipe) => (
               <li
                 key={recipe.id}
@@ -105,6 +106,8 @@ const App: React.FC = () => {
           )}
         </div>
       </div>
+
+      <CustomSpellCreator setToastData={setToastData} />
     </div>
   );
 };
