@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { SpellCaster } from '@the-coven/util-spellcaster';
 import { clientCastSpell } from './spellCasting';
 import { Spell } from '@the-coven/util-interface';
+import { SpellCaster } from '@the-coven/util-spellcaster';
+import Toast from './toast/toast';
 
 const App: React.FC = () => {
   const [spells, setSpells] = useState<Spell[]>([]);
   const [selectedSpell, setSelectedSpell] = useState<Spell | null>(null);
-  const [castResult, setCastResult] = useState<string>('');
+  const [toastData, setToastData] = useState<{
+    title: string;
+    message: string[];
+  } | null>(null);
 
   useEffect(() => {
     fetch('/api/spells')
@@ -29,13 +33,23 @@ const App: React.FC = () => {
         clientCastSpell
       );
       const result = await spellCaster.cast('abracadabra');
-      setCastResult(result);
+
+      // Parse the result string into an array of lines
+      const resultLines = result
+        .split('\n')
+        .filter((line) => line.trim() !== '');
+
+      setToastData({
+        title: resultLines[0],
+        message: resultLines.slice(1),
+      });
     } catch (error) {
-      setCastResult(
-        `Error casting spell: ${
-          error instanceof Error ? error.message : 'Unknown error'
-        }`
-      );
+      setToastData({
+        title: 'Spell Casting Failed',
+        message: [
+          `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        ],
+      });
     }
   };
 
@@ -48,6 +62,14 @@ const App: React.FC = () => {
         padding: '20px',
       }}
     >
+      {toastData && (
+        <Toast
+          title={toastData.title}
+          message={toastData.message}
+          onClose={() => setToastData(null)}
+        />
+      )}
+
       <h1>Spellcasting App</h1>
 
       <div style={{ display: 'flex', gap: '20px' }}>
@@ -88,21 +110,6 @@ const App: React.FC = () => {
           )}
         </div>
       </div>
-
-      {castResult && (
-        <div
-          style={{
-            marginTop: '20px',
-            padding: '10px',
-            backgroundColor: '#f0f0f0',
-            border: '1px solid #ccc',
-            borderRadius: '5px',
-          }}
-        >
-          <h3>Spell Casting Result</h3>
-          <p>{castResult}</p>
-        </div>
-      )}
     </div>
   );
 };
