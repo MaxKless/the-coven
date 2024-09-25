@@ -1,1 +1,68 @@
-/* Your styles goes here. */
+/* app.module.css */
+
+.appContainer {
+  font-family: 'Garamond', serif; /* Gothic font for a witchy feel */
+  background-color: #0a0a0a; /* Dark background */
+  color: #f8f8f2; /* Light text for readability */
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #4e3b66; /* Subtle purple border */
+  border-radius: 8px;
+}
+
+.title {
+  color: #ff5555; /* Halloween red */
+  text-align: center;
+}
+
+.spellList {
+  display: flex;
+  gap: 20px;
+}
+
+.spellListContainer,
+.selectedSpellContainer {
+  flex: 1;
+  background-color: #22212c; /* Darker element backgrounds */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.spellItem {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #50fa7b; /* A spooky green border */
+  margin-bottom: 5px;
+  background-color: transparent;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.spellItem:hover,
+.spellItem.selected {
+  background-color: #6272a4; /* Lighter purple for selected/hover */
+  color: #50fa7b; /* Text color changes on hover/select */
+}
+
+.spellDetails {
+  padding: 10px;
+  background-color: #282a36; /* Slightly lighter background for contrast */
+  border-radius: 4px;
+}
+
+.castButton {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background-color: #ff5555; /* Button color */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.castButton:hover {
+  background-color: #ff79c6; /* A lighter red on hover */
+}

@@ -3,6 +3,7 @@ import { clientCastSpell } from './spellCasting';
 import { Spell } from '@the-coven/util-interface';
 import { SpellCaster } from '@the-coven/util-spellcaster';
 import Toast from './toast/toast';
+import styles from './app.module.css';
 
 const App: React.FC = () => {
   const [spells, setSpells] = useState<Spell[]>([]);
@@ -54,14 +55,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div
-      style={{
-        fontFamily: 'Arial, sans-serif',
-        maxWidth: '600px',
-        margin: '0 auto',
-        padding: '20px',
-      }}
-    >
+    <div className={styles.appContainer}>
       {toastData && (
         <Toast
           title={toastData.title}
@@ -70,26 +64,23 @@ const App: React.FC = () => {
         />
       )}
 
-      <h1>Spellcasting App</h1>
-
-      <div style={{ display: 'flex', gap: '20px' }}>
-        <div style={{ flex: 1 }}>
+      <h1 className={styles.title}>Spellcasting App</h1>
+      <div className={styles.spellList}>
+        <div className={styles.spellListContainer}>
           <h2>Spells</h2>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
+          <ul
+            className={styles.spellItemList}
+            style={{ listStyle: 'none', padding: 0 }}
+          >
             {spells.map((spell) => (
               <li
                 key={spell.id}
                 onClick={() => handleSpellClick(spell)}
-                style={{
-                  cursor: 'pointer',
-                  padding: '10px',
-                  border: '1px solid #ccc',
-                  marginBottom: '5px',
-                  backgroundColor:
-                    selectedSpell && selectedSpell.id === spell.id
-                      ? '#e0e0e0'
-                      : 'transparent',
-                }}
+                className={`${styles.spellItem} ${
+                  selectedSpell && selectedSpell.id === spell.id
+                    ? styles.selected
+                    : ''
+                }`}
               >
                 {spell.name}
               </li>
@@ -97,13 +88,15 @@ const App: React.FC = () => {
           </ul>
         </div>
 
-        <div style={{ flex: 1 }}>
+        <div className={styles.selectedSpellContainer}>
           <h2>Selected Spell</h2>
           {selectedSpell ? (
-            <div>
+            <div className={styles.spellDetails}>
               <h3>{selectedSpell.name}</h3>
               <p>{selectedSpell.description}</p>
-              <button onClick={castSpell}>Cast Spell</button>
+              <button className={styles.castButton} onClick={castSpell}>
+                Cast Spell
+              </button>
             </div>
           ) : (
             <p>Select a spell to cast</p>
