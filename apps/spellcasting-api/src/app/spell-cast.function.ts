@@ -39,7 +39,7 @@ export async function serverCastSpell(
   }
 
   // Simulate spell casting delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 500));
 
   return resultMessage;
 }

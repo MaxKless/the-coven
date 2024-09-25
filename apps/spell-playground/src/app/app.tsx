@@ -28,8 +28,6 @@ const App: React.FC = () => {
 
     try {
       const result = await castSpellFromRecipe(selectedRecipe, 'abracadabra');
-
-      // Parse the result string into an array of lines
       const resultLines = result
         .split('\n')
         .filter((line) => line.trim() !== '');
@@ -58,16 +56,16 @@ const App: React.FC = () => {
         />
       )}
 
-      <h1 className={styles.title}>Spellcasting App</h1>
-      <div className={styles.recipeList}>
-        <div className={styles.recipeListContainer}>
+      <h1 className={styles.title}>Magical Recipe Book</h1>
+      <div className={styles.spellList}>
+        <div className={styles.spellListContainer}>
           <h2>Recipes</h2>
-          <ul className={styles.recipeItemList}>
+          <ul>
             {recipes.map((recipe) => (
               <li
                 key={recipe.id}
                 onClick={() => handleRecipeClick(recipe)}
-                className={`${styles.recipeItem} ${
+                className={`${styles.spellItem} ${
                   selectedRecipe && selectedRecipe.id === recipe.id
                     ? styles.selected
                     : ''
@@ -79,15 +77,25 @@ const App: React.FC = () => {
           </ul>
         </div>
 
-        <div className={styles.selectedRecipeContainer}>
+        <div className={styles.selectedSpellContainer}>
           <h2>Selected Recipe</h2>
           {selectedRecipe ? (
-            <div className={styles.recipeDetails}>
+            <div className={styles.spellDetails}>
               <h3>{selectedRecipe.name}</h3>
-              <p>Type: {selectedRecipe.type}</p>
-              <p>Ingredients: {selectedRecipe.ingredients.join(', ')}</p>
-              <p>Incantations: {selectedRecipe.incantations.join(', ')}</p>
-              <p>{selectedRecipe.description}</p>
+              <p>
+                <strong>Type:</strong> {selectedRecipe.type}
+              </p>
+              <p>
+                <strong>Ingredients:</strong>{' '}
+                {selectedRecipe.ingredients.join(', ')}
+              </p>
+              <p>
+                <strong>Incantations:</strong>{' '}
+                {selectedRecipe.incantations.join(', ')}
+              </p>
+              <p>
+                <strong>Description:</strong> {selectedRecipe.description}
+              </p>
               <button className={styles.castButton} onClick={castSpell}>
                 Cast Spell from Recipe
               </button>
