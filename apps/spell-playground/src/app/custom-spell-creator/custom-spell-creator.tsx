@@ -48,19 +48,32 @@ const CustomSpellCreator: React.FC<CustomSpellCreatorProps> = ({
 
   return (
     <div className={styles.customSpellCreator}>
-      <h2>Create Custom Spell</h2>
+      <h2>
+        <span role="img" aria-label="Candle">
+          🕯️
+        </span>{' '}
+        Create Custom Spell{' '}
+        <span role="img" aria-label="Spider web">
+          🕸️
+        </span>
+      </h2>
       <input
         type="text"
         placeholder="Spell Name"
+        aria-label="Spell Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <select
         value={type}
         onChange={(e) => setType(e.target.value as SpellType)}
+        aria-label="Spell Type"
       >
         {Object.values(SpellType).map((t) => (
           <option key={t} value={t}>
+            <span role="img" aria-label="Magic wand">
+              🪄
+            </span>{' '}
             {t}
           </option>
         ))}
@@ -68,16 +81,26 @@ const CustomSpellCreator: React.FC<CustomSpellCreatorProps> = ({
       <input
         type="text"
         placeholder="Ingredients (comma-separated)"
+        aria-label="Ingredients"
         value={ingredients}
         onChange={(e) => setIngredients(e.target.value)}
       />
       <input
         type="text"
         placeholder="Incantations (comma-separated)"
+        aria-label="Incantations"
         value={incantations}
         onChange={(e) => setIncantations(e.target.value)}
       />
-      <button onClick={handleCastCustomSpell}>Cast Custom Spell</button>
+      <button onClick={handleCastCustomSpell}>
+        <span role="img" aria-label="Crescent moon">
+          🌙
+        </span>{' '}
+        Cast Custom Spell{' '}
+        <span role="img" aria-label="Black cat">
+          🐈‍⬛
+        </span>
+      </button>
     </div>
   );
 };

@@ -35,12 +35,12 @@ const App: React.FC = () => {
         .filter((line) => line.trim() !== '');
 
       setToastData({
-        title: resultLines[0],
+        title: `:🎃: :✨: ${resultLines[0]}`,
         message: resultLines.slice(1),
       });
     } catch (error) {
       setToastData({
-        title: 'Spell Casting Failed',
+        title: ':🧙‍♀️: :🌙: Spell Casting Failed',
         message: [
           `Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
         ],
@@ -58,10 +58,29 @@ const App: React.FC = () => {
         />
       )}
 
-      <h1 className={styles.title}>Magical Recipe Book</h1>
+      <h1 className={styles.title}>
+        <span role="img" aria-label="Witch">
+          🧙‍♀️
+        </span>{' '}
+        Magical Recipe Book{' '}
+        <span role="img" aria-label="Spell book">
+          📖
+        </span>
+        <span role="img" aria-label="Sparkles">
+          ✨
+        </span>
+      </h1>
       <div className={styles.spellList}>
         <div className={styles.spellListContainer}>
-          <h2>Recipes</h2>
+          <h2>
+            <span role="img" aria-label="Autumn leaf">
+              🍂
+            </span>{' '}
+            Autumn Recipes{' '}
+            <span role="img" aria-label="Maple leaf">
+              🍁
+            </span>
+          </h2>
           <ul className={styles.recipeItemList}>
             {recipes.map((recipe) => (
               <li
@@ -73,17 +92,36 @@ const App: React.FC = () => {
                     : ''
                 }`}
               >
-                {recipe.name}
+                <span role="img" aria-label="Crystal ball">
+                  🔮
+                </span>{' '}
+                {recipe.name}{' '}
+                <span role="img" aria-label="Magic wand">
+                  🪄
+                </span>
               </li>
             ))}
           </ul>
         </div>
 
         <div className={styles.selectedSpellContainer}>
-          <h2>Selected Recipe</h2>
+          <h2>
+            <span role="img" aria-label="Crescent moon">
+              🌙
+            </span>{' '}
+            Selected Recipe{' '}
+            <span role="img" aria-label="Herb">
+              🌿
+            </span>
+          </h2>
           {selectedRecipe ? (
             <div className={styles.spellDetails}>
-              <h3>{selectedRecipe.name}</h3>
+              <h3>
+                <span role="img" aria-label="Evil eye amulet">
+                  🧿
+                </span>{' '}
+                {selectedRecipe.name}{' '}
+              </h3>
               <p>
                 <strong>Type:</strong> {selectedRecipe.type}
               </p>
@@ -99,11 +137,25 @@ const App: React.FC = () => {
                 <strong>Description:</strong> {selectedRecipe.description}
               </p>
               <button className={styles.castButton} onClick={castSpell}>
-                Cast Spell from Recipe
+                <span role="img" aria-label="Candle">
+                  🕯️
+                </span>{' '}
+                Cast Spell from Recipe{' '}
+                <span role="img" aria-label="Bat">
+                  🦇
+                </span>
               </button>
             </div>
           ) : (
-            <p>Select a recipe to cast a spell</p>
+            <p>
+              <span role="img" aria-label="Crystal ball">
+                🔮
+              </span>{' '}
+              Select a recipe to cast a spell{' '}
+              <span role="img" aria-label="Crescent moon">
+                ☽
+              </span>
+            </p>
           )}
         </div>
       </div>
