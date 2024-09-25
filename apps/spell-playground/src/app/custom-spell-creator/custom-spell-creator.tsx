@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SpellType } from '@the-coven/util-interface';
-import { castCustomSpell } from '../spellCasting';
+import { spellCastingSDK } from '@the-coven/spellcasting-sdk';
 import styles from '../app.module.css';
 
 interface CustomSpellCreatorProps {
@@ -17,15 +17,17 @@ const CustomSpellCreator: React.FC<CustomSpellCreatorProps> = ({
 
   const handleCastCustomSpell = async () => {
     try {
-      const result = await castCustomSpell(
+      const customSpell = spellCastingSDK.createSpell(
         name,
         type,
         ingredients.split(',').map((i) => i.trim()),
-        incantations.split(',').map((i) => i.trim()),
+        incantations.split(',').map((i) => i.trim())
+      );
+      const result = await spellCastingSDK.castSpell(
+        customSpell,
         'abracadabra'
       );
 
-      // Parse the result string into an array of lines
       const resultLines = result
         .split('\n')
         .filter((line) => line.trim() !== '');

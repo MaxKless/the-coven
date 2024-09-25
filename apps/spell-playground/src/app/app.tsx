@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Recipe } from '@the-coven/util-interface';
-import { castSpellFromRecipe } from './spellCasting';
+import { spellCastingSDK } from '@the-coven/spellcasting-sdk';
 import Toast from './toast/Toast';
 import CustomSpellCreator from './custom-spell-creator/custom-spell-creator';
 import styles from './app.module.css';
@@ -14,8 +14,8 @@ const App: React.FC = () => {
   } | null>(null);
 
   useEffect(() => {
-    fetch('/api/recipes')
-      .then((response) => response.json())
+    spellCastingSDK
+      .getAllRecipes()
       .then((data: Recipe[]) => setRecipes(data))
       .catch((error) => console.error('Error fetching recipes:', error));
   }, []);
@@ -28,7 +28,8 @@ const App: React.FC = () => {
     if (!selectedRecipe) return;
 
     try {
-      const result = await castSpellFromRecipe(selectedRecipe, 'abracadabra');
+      const spell = spellCastingSDK.createSpellFromRecipe(selectedRecipe);
+      const result = await spellCastingSDK.castSpell(spell, 'abracadabra');
       const resultLines = result
         .split('\n')
         .filter((line) => line.trim() !== '');

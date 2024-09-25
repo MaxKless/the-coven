@@ -3,7 +3,7 @@ import { Recipe, Spell, SpellType } from '@the-coven/util-interface';
 export class SpellCastingSDK {
   private baseUrl: string;
 
-  constructor(baseUrl = 'http://localhost:3000') {
+  constructor(baseUrl = '') {
     this.baseUrl = baseUrl;
   }
 
@@ -60,5 +60,5 @@ export class SpellCastingSDK {
   }
 }
 
-// Export a singleton instance
+// Export a singleton instance with an empty base URL for relative paths
 export const spellCastingSDK = new SpellCastingSDK();
