@@ -4,6 +4,7 @@ export enum SpellType {
   Conjuration = 'Conjuration',
   Divination = 'Divination',
   Abjuration = 'Abjuration',
+  Transmutation = 'Transmutation',
 }
 
 export interface Recipe {
