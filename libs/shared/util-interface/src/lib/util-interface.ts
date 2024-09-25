@@ -9,14 +9,9 @@ export enum SpellType {
 
 export interface Recipe {
   id: string;
+  name: string;
   type: SpellType;
+  description: string;
   ingredients: string[];
   incantations: string[];
-}
-
-export interface Spell {
-  id: string;
-  name: string;
-  description: string;
-  recipes: Recipe[];
 }

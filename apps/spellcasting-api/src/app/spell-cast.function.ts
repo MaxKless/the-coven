@@ -1,39 +1,21 @@
-import { Recipe, Spell, SpellType } from '@the-coven/util-interface';
-import { getSpell } from './spells.repository';
+import { Spell, SpellType } from '@the-coven/util-interface';
 
 export async function serverCastSpell(
-  spellId: string,
-  recipeId: string,
-  passphrase: string,
-  extraIngredients: string[],
-  extraIncantations: string[]
+  spell: Spell,
+  passphrase: string
 ): Promise<string> {
   // Validate passphrase
   if (passphrase !== 'abracadabra') {
     throw new Error('Invalid passphrase. Spell casting failed.');
   }
 
-  // Fetch spell and recipe details from the database
-  const spell: Spell | null = await getSpell(spellId);
-  if (!spell) {
-    throw new Error(`Spell with id ${spellId} not found.`);
-  }
-
-  const recipe: Recipe | null =
-    spell.recipes.find((r) => r.id === recipeId) || null;
-
-  // Combine base ingredients/incantations with extras
-  const allIngredients = [...recipe.ingredients, ...extraIngredients];
-  const allIncantations = [...recipe.incantations, ...extraIncantations];
-
   // Generate result message
-  let resultMessage = `${spell.name} (${recipe.type}) cast successfully!\n`;
-  resultMessage += `Recipe Used: ${recipe.id}\n`;
-  resultMessage += `Ingredients used: ${allIngredients.join(', ')}\n`;
-  resultMessage += `Incantations used: ${allIncantations.join(', ')}\n`;
+  let resultMessage = `${spell.getName()} (${spell.getType()}) cast successfully!\n`;
+  resultMessage += `Ingredients used: ${spell.getIngredients().join(', ')}\n`;
+  resultMessage += `Incantations used: ${spell.getIncantations().join(', ')}\n`;
 
   // Add some flavor text based on the spell type
-  switch (recipe.type) {
+  switch (spell.getType()) {
     case SpellType.Enchantment:
       resultMessage += 'The air shimmers with magical energy.';
       break;
@@ -49,9 +31,15 @@ export async function serverCastSpell(
     case SpellType.Abjuration:
       resultMessage += 'A protective aura surrounds you.';
       break;
+    case SpellType.Transmutation:
+      resultMessage += 'The very essence of matter bends to your will.';
+      break;
     default:
       resultMessage += "The spell's effects manifest in wondrous ways.";
   }
+
+  // Simulate spell casting delay
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return resultMessage;
 }

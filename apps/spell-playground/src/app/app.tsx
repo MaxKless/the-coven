@@ -1,39 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { clientCastSpell } from './spellCasting';
-import { Spell } from '@the-coven/util-interface';
-import { SpellCaster } from '@the-coven/util-spellcaster';
-import Toast from './toast/toast';
+import { Recipe } from '@the-coven/util-interface';
+import { castSpellFromRecipe } from './spellCasting';
+import Toast from './toast/Toast';
 import styles from './app.module.css';
 
 const App: React.FC = () => {
-  const [spells, setSpells] = useState<Spell[]>([]);
-  const [selectedSpell, setSelectedSpell] = useState<Spell | null>(null);
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
   const [toastData, setToastData] = useState<{
     title: string;
     message: string[];
   } | null>(null);
 
   useEffect(() => {
-    fetch('/api/spells')
+    fetch('/api/recipes')
       .then((response) => response.json())
-      .then((data: Spell[]) => setSpells(data))
-      .catch((error) => console.error('Error fetching spells:', error));
+      .then((data: Recipe[]) => setRecipes(data))
+      .catch((error) => console.error('Error fetching recipes:', error));
   }, []);
 
-  const handleSpellClick = (spell: Spell) => {
-    setSelectedSpell(spell);
+  const handleRecipeClick = (recipe: Recipe) => {
+    setSelectedRecipe(recipe);
   };
 
   const castSpell = async () => {
-    if (!selectedSpell) return;
+    if (!selectedRecipe) return;
 
     try {
-      const spellCaster = new SpellCaster(
-        selectedSpell,
-        selectedSpell.recipes[0].id,
-        clientCastSpell
-      );
-      const result = await spellCaster.cast('abracadabra');
+      const result = await castSpellFromRecipe(selectedRecipe, 'abracadabra');
 
       // Parse the result string into an array of lines
       const resultLines = result
@@ -65,41 +59,41 @@ const App: React.FC = () => {
       )}
 
       <h1 className={styles.title}>Spellcasting App</h1>
-      <div className={styles.spellList}>
-        <div className={styles.spellListContainer}>
-          <h2>Spells</h2>
-          <ul
-            className={styles.spellItemList}
-            style={{ listStyle: 'none', padding: 0 }}
-          >
-            {spells.map((spell) => (
+      <div className={styles.recipeList}>
+        <div className={styles.recipeListContainer}>
+          <h2>Recipes</h2>
+          <ul className={styles.recipeItemList}>
+            {recipes.map((recipe) => (
               <li
-                key={spell.id}
-                onClick={() => handleSpellClick(spell)}
-                className={`${styles.spellItem} ${
-                  selectedSpell && selectedSpell.id === spell.id
+                key={recipe.id}
+                onClick={() => handleRecipeClick(recipe)}
+                className={`${styles.recipeItem} ${
+                  selectedRecipe && selectedRecipe.id === recipe.id
                     ? styles.selected
                     : ''
                 }`}
               >
-                {spell.name}
+                {recipe.name}
               </li>
             ))}
           </ul>
         </div>
 
-        <div className={styles.selectedSpellContainer}>
-          <h2>Selected Spell</h2>
-          {selectedSpell ? (
-            <div className={styles.spellDetails}>
-              <h3>{selectedSpell.name}</h3>
-              <p>{selectedSpell.description}</p>
+        <div className={styles.selectedRecipeContainer}>
+          <h2>Selected Recipe</h2>
+          {selectedRecipe ? (
+            <div className={styles.recipeDetails}>
+              <h3>{selectedRecipe.name}</h3>
+              <p>Type: {selectedRecipe.type}</p>
+              <p>Ingredients: {selectedRecipe.ingredients.join(', ')}</p>
+              <p>Incantations: {selectedRecipe.incantations.join(', ')}</p>
+              <p>{selectedRecipe.description}</p>
               <button className={styles.castButton} onClick={castSpell}>
-                Cast Spell
+                Cast Spell from Recipe
               </button>
             </div>
           ) : (
-            <p>Select a spell to cast</p>
+            <p>Select a recipe to cast a spell</p>
           )}
         </div>
       </div>

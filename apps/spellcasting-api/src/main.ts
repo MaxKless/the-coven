@@ -1,46 +1,42 @@
 import express from 'express';
-import { getAllSpells, getSpell } from './app/spells.repository';
+
+import { Spell } from '@the-coven/util-interface';
 import { serverCastSpell } from './app/spell-cast.function';
-import { SpellCaster } from '@the-coven/util-spellcaster';
+import { getAllRecipes, getRecipe } from './app/recipes.repository';
 
 const app = express();
 app.use(express.json());
 
-app.get('/api/spells', (req, res) => {
-  res.json(getAllSpells());
+app.get('/api/recipes', (req, res) => {
+  const recipes = getAllRecipes();
+  res.json(recipes);
 });
 
-app.get('/api/spells/:id', (req, res) => {
-  const spell = getSpell(req.params.id);
-  if (spell) {
-    res.json(spell);
+app.get('/api/recipes/:id', (req, res) => {
+  const recipe = getRecipe(req.params.id);
+  if (recipe) {
+    res.json(recipe);
   } else {
-    res.status(404).json({ message: 'Spell not found' });
+    res.status(404).json({ message: 'Recipe not found' });
   }
 });
 
-app.post('/api/cast-spell/:id', async (req, res) => {
-  const spell = getSpell(req.params.id);
-  if (!spell) {
-    return res.status(404).json({ message: 'Spell not found' });
-  }
-
-  const { recipeId, passphrase, extraIngredients, extraIncantations } =
-    req.body;
+app.post('/api/cast-spell', (req, res) => {
+  const { name, type, ingredients, incantations, passphrase } = req.body;
 
   try {
-    const spellCaster = new SpellCaster(spell, recipeId, serverCastSpell);
-    extraIngredients?.forEach((ingredient) =>
-      spellCaster.addExtraIngredient(ingredient)
-    );
-    extraIncantations?.forEach((incantation) =>
-      spellCaster.addExtraIncantation(incantation)
-    );
-
-    const result = await spellCaster.cast(passphrase);
-    res.json({ message: result });
+    const spell = new Spell(name, type, ingredients, incantations);
+    serverCastSpell(spell, passphrase)
+      .then((result) => {
+        res.json({ message: result });
+      })
+      .catch((error) => {
+        res.status(400).json({ error: error.message });
+      });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({
+      error: error instanceof Error ? error.message : 'Invalid spell data',
+    });
   }
 });
 

@@ -1,45 +1,44 @@
 import { Recipe, Spell } from '@the-coven/util-interface';
-
-type CastFunction = (
-  spellId: string,
-  recipeId: string,
-  passphrase: string,
-  extraIngredients: string[],
-  extraIncantations: string[]
-) => Promise<string>;
+let _spellCaster: SpellCaster | undefined;
 
 export class SpellCaster {
-  private spell: Spell;
-  private recipe: Recipe;
-  private extraIngredients: string[] = [];
-  private extraIncantations: string[] = [];
-  private castFunction: CastFunction;
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  private constructor() {}
 
-  constructor(spell: Spell, recipeId: string, castFunction: CastFunction) {
-    this.spell = spell;
-    const selectedRecipe = spell.recipes.find((r) => r.id === recipeId);
-    if (!selectedRecipe) {
-      throw new Error('Recipe not found for this spell.');
+  async getRecipe(recipeId: string): Promise<Recipe> {
+    const response = await fetch(`/api/recipes/${recipeId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch recipe');
     }
-    this.recipe = selectedRecipe;
-    this.castFunction = castFunction;
+    return await response.json();
   }
 
-  addExtraIngredient(ingredient: string): void {
-    this.extraIngredients.push(ingredient);
+  async cast(spell: Spell, passphrase: string): Promise<string> {
+    const response = await fetch('/api/cast-spell', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: spell.getName(),
+        type: spell.getType(),
+        ingredients: spell.getIngredients(),
+        incantations: spell.getIncantations(),
+        passphrase,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Spell casting failed');
+    }
+
+    return await response.text();
   }
 
-  addExtraIncantation(incantation: string): void {
-    this.extraIncantations.push(incantation);
-  }
-
-  async cast(passphrase: string): Promise<string> {
-    return this.castFunction(
-      this.spell.id,
-      this.recipe.id,
-      passphrase,
-      this.extraIngredients,
-      this.extraIncantations
-    );
+  static getInstance(): SpellCaster {
+    if (!_spellCaster) {
+      _spellCaster = new SpellCaster();
+    }
+    return _spellCaster;
   }
 }
