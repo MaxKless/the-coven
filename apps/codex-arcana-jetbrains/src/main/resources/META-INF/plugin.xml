@@ -8,10 +8,17 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup displayType="STICKY_BALLOON" id="Codex Arcana"></notificationGroup>
+        <toolWindow factoryClass="com.thecoven.codexarcana.toolwindow.CodexArcanaToolwindowFactory"
+                    id="CodexArcanaToolwindow"
+                    anchor="right"
+        />
+
     </extensions>
 
     <actions>
         <action id="com.thecoven.codexarcana.HelloAction" class="com.thecoven.codexarcana.HelloAction"
                 text="Hello from Codex Arcana"/>
+
+
     </actions>
 </idea-plugin>
