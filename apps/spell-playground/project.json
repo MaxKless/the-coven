@@ -1,0 +1,9 @@
+{
+  "name": "spell-playground",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/spell-playground/src",
+  "projectType": "application",
+  "tags": ["scope:client", "type:app"],
+  "// targets": "to see all targets run: nx show project spell-playground --web",
+  "targets": {}
+}
