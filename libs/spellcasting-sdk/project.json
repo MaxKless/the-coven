@@ -1,7 +1,7 @@
 {
   "name": "spellcasting-sdk",
-  "$schema": "../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/src",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/spellcasting-sdk/src",
   "projectType": "library",
   "release": {
     "version": {
@@ -14,13 +14,15 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/js:tsc",
+      "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs",
-        "main": "libs/src/index.ts",
-        "tsConfig": "libs/tsconfig.lib.json",
-        "assets": ["libs/*.md"]
+        "outputPath": "dist/libs/spellcasting-sdk",
+        "main": "libs/spellcasting-sdk/src/index.ts",
+        "tsConfig": "libs/spellcasting-sdk/tsconfig.lib.json",
+        "assets": ["libs/spellcasting-sdk/*.md"],
+        "generatePackageJson": true,
+        "format": ["cjs"]
       }
     },
     "nx-release-publish": {
