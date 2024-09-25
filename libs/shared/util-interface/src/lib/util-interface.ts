@@ -1,3 +1,11 @@
+export enum SpellType {
+  Enchantment = 'Enchantment',
+  Illusion = 'Illusion',
+  Conjuration = 'Conjuration',
+  Divination = 'Divination',
+  Abjuration = 'Abjuration',
+}
+
 export interface Recipe {
   id: string;
   type: SpellType;
@@ -5,20 +13,9 @@ export interface Recipe {
   incantations: string[];
 }
 
-export interface Spellcasting {
+export interface Spell {
   id: string;
   name: string;
   description: string;
-  difficulty: number;
-  ingredients: string[];
-  incantations: string[];
   recipes: Recipe[];
-}
-
-export enum SpellType {
-  Enchantment = 'Enchantment',
-  Illusion = 'Illusion',
-  Conjuration = 'Conjuration',
-  Divination = 'Divination',
-  Abjuration = 'Abjuration',
 }

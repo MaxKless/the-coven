@@ -1,13 +1,10 @@
-import { SpellType, Spellcasting } from '@the-coven/util-interface';
+import { SpellType, Spell } from '@the-coven/util-interface';
 
-const spells: Spellcasting[] = [
+const spells: Spell[] = [
   {
     id: 'levitation',
     name: 'Levitation Charm',
     description: 'Makes objects fly or hover in the air.',
-    difficulty: 3,
-    ingredients: ['feather', 'moonstone'],
-    incantations: ['Wingardium Leviosa'],
     recipes: [
       {
         id: 'basic-levitation',
@@ -15,36 +12,23 @@ const spells: Spellcasting[] = [
         ingredients: ['feather', 'moonstone'],
         incantations: ['Wingardium Leviosa'],
       },
-    ],
-  },
-  {
-    id: 'invisibility',
-    name: 'Invisibility Spell',
-    description: 'Renders the caster invisible to the naked eye.',
-    difficulty: 7,
-    ingredients: ['chameleon skin', 'ghost essence'],
-    incantations: ['Invisibilis Totalus'],
-    recipes: [
       {
-        id: 'full-invisibility',
-        type: SpellType.Illusion,
-        ingredients: ['chameleon skin', 'ghost essence'],
-        incantations: ['Invisibilis Totalus'],
+        id: 'advanced-levitation',
+        type: SpellType.Enchantment,
+        ingredients: ['feather', 'moonstone', 'pixie dust'],
+        incantations: ['Wingardium Leviosa', 'Altius Levitas'],
       },
     ],
   },
   {
     id: 'fireball',
-    name: 'Fireball Conjuration',
-    description: 'Summons a powerful ball of fire.',
-    difficulty: 5,
-    ingredients: ['sulfur', 'dragon scale'],
-    incantations: ['Ignis Sphera'],
+    name: 'Fireball',
+    description: 'Conjures a powerful ball of fire.',
     recipes: [
       {
         id: 'basic-fireball',
         type: SpellType.Conjuration,
-        ingredients: ['sulfur', 'dragon scale'],
+        ingredients: ['sulfur', 'bat wing'],
         incantations: ['Ignis Sphera'],
       },
     ],
