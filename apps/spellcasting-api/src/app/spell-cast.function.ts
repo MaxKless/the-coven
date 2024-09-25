@@ -10,12 +10,12 @@ export async function serverCastSpell(
   }
 
   // Generate result message
-  let resultMessage = `${spell.getName()} (${spell.getType()}) cast successfully!\n`;
-  resultMessage += `Ingredients used: ${spell.getIngredients().join(', ')}\n`;
-  resultMessage += `Incantations used: ${spell.getIncantations().join(', ')}\n`;
+  let resultMessage = `${spell.name} (${spell.type}) cast successfully!\n`;
+  resultMessage += `Ingredients used: ${spell.ingredients.join(', ')}\n`;
+  resultMessage += `Incantations used: ${spell.incantations.join(', ')}\n`;
 
   // Add some flavor text based on the spell type
-  switch (spell.getType()) {
+  switch (spell.type) {
     case SpellType.Enchantment:
       resultMessage += 'The air shimmers with magical energy.';
       break;

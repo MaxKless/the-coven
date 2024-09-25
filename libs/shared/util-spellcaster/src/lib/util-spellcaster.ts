@@ -20,10 +20,10 @@ export class SpellCaster {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: spell.getName(),
-        type: spell.getType(),
-        ingredients: spell.getIngredients(),
-        incantations: spell.getIncantations(),
+        name: spell.name,
+        type: spell.type,
+        ingredients: spell.ingredients,
+        incantations: spell.incantations,
         passphrase,
       }),
     });
