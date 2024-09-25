@@ -70,5 +70,10 @@
         "linter": "eslint"
       }
     }
+  },
+  "release": {
+    "version": {
+      "preVersionCommand": "npx nx run-many -t build"
+    }
   }
 }
