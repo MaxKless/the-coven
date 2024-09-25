@@ -1,14 +1,24 @@
 import express from 'express';
-
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+import { getAllSpells, getSpell } from './app/spells.repository';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
+app.get('/api/spells', (req, res) => {
+  res.send(getAllSpells());
 });
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+app.get('/api/spells/:id', (req, res) => {
+  const spell = getSpell(req.params.id);
+  if (spell) {
+    res.send(spell);
+  } else {
+    res.status(404).send({ message: 'Spell not found' });
+  }
 });
+
+const port = process.env.PORT || 3000;
+const server = app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}/api`);
+});
+
+server.on('error', console.error);
