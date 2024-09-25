@@ -6,16 +6,10 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup displayType="STICKY_BALLOON" id="Codex Arcana"></notificationGroup>
-        <toolWindow factoryClass="com.thecoven.codexarcana.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="com.thecoven.codexarcana.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
     <actions>
         <action id="com.thecoven.codexarcana.HelloAction" class="com.thecoven.codexarcana.HelloAction"
                 text="Hello from Codex Arcana"/>
