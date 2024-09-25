@@ -1,82 +1,152 @@
-# TheCoven
+# The Coven - Your SpellCasting companion
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+Welcome to The Coven's SpellCasting Companion, an Nx-powered monorepo for managing and casting magical spells!
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/node?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+This project is created for the purpose of the [Squiggle Conf 2024](https://2024.squiggleconf.com/) workshop [_Build Editor Extensions with the Makers of Nx Console_](https://2024.squiggleconf.com/sessions#workshop-katerina-and-max).
 
-## Finish your remote caching setup
+## Project Structure
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/oQiQnwymgG)
+This Nx workspace is organized into the following apps and libraries:
 
+```tree
+.
+├── apps
+│   ├── spell-playground        # React.js client application
+│   └── spellcasting-api        # Express.js API server   
+├── libs
+│   ├── shared
+│   │   ├── util-interface      # Shared TypeScript interfaces and types
+│   │   └── util-spellcaster    # Core spellcasting logic
+│   └── spellcasting-sdk        # SDK for interacting with the API
+```
 
-## Run tasks
+## Getting Started
 
-To run the dev server for your app, use:
+### Prerequisites
 
-```sh
+- Node.js (v18 or later)
+- npm or Yarn or pnpm
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone git@github.com:MaxKless/the-coven.git
+   cd the-coven
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+### Running the Project
+
+1. Start the API server:
+
+   ```bash
+   npx nx serve spellcasting-api
+   ```
+
+2. In a new terminal, start the client application:
+
+   ```bash
+   npx nx serve spell-playground
+   ```
+
+3. Open your browser and navigate to `http://localhost:4200` to view the application.
+
+## Development
+
+### API Server (apps/spellcasting-api)
+
+To run the API server in development mode:
+
+```bash
 npx nx serve spellcasting-api
 ```
 
-To create a production bundle:
+### Client Application (apps/spell-playground)
 
-```sh
+To run the client in development mode:
+
+```bash
+npx nx serve spell-playground
+```
+
+### Building Projects
+
+To create a production build of a project:
+
+```bash
+npx nx build <project-name>
+```
+
+For example:
+
+```bash
 npx nx build spellcasting-api
 ```
 
-To see all available targets to run for a project, run:
+### Running Tests
 
-```sh
-npx nx show project spellcasting-api
-```
-        
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+To run tests for all projects:
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Add new projects
-
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
-
-Use the plugin's generator to create new projects.
-
-To generate a new application, use:
-
-```sh
-npx nx g @nx/node:app demo
+```bash
+npx nx run-many --target=test --all
 ```
 
-To generate a new library, use:
+To run tests for a specific project:
 
-```sh
-npx nx g @nx/node:lib mylib
+```bash
+npx nx test <project-name>
 ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+### Linting
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+To lint all projects:
 
+```bash
+npx nx run-many --target=lint --all
+```
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+To lint a specific project:
 
-## Install Nx Console
+```bash
+npx nx lint <project-name>
+```
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+## Useful Nx Commands
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- `npx nx graph`: Visually explore the project graph
+- `npx nx affected:graph`: See what's been affected by your changes
+- `npx nx show project <project-name>`: See available targets for a project
 
-## Useful links
+## Documentation
 
-Learn more:
+API and SDK documentation can be found in the respective project directories.
 
-- [Learn more about this workspace setup](https://nx.dev/nx-api/node?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [SpellCasting API Documentation](apps/spellcasting-api/README.md)
+- [SpellCasting SDK Documentation](libs/spellcasting-sdk/README.md)
 
-And join the Nx community:
+## Learn More About Nx
+
+- [Nx Documentation](https://nx.dev)
+- [Nx Cloud](https://nx.app/)
+
+### Max & Katerina links
+
+- [Max's X](https://x.com/MaxKless)
+- [Katerina's X](https://x.com/psybercity)
+
+## Community
+
+Join the Nx community:
+
 - [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Twitter](https://twitter.com/nxdevtools)
+- [YouTube Channel](https://www.youtube.com/@nxdevtools)

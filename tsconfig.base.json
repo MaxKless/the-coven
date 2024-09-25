@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@the-coven/spellcasting-sdk": ["libs/spellcasting-sdk/src/index.ts"],
+      "@the-coven/util-interface": ["libs/shared/util-interface/src/index.ts"],
+      "@the-coven/util-spellcaster": [
+        "libs/shared/util-spellcaster/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
