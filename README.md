@@ -14,13 +14,20 @@ This Nx workspace is organized into the following apps and libraries:
 .
 ├── apps
 │   ├── spell-playground        # React.js client application
-│   └── spellcasting-api        # Express.js API server   
+│   └── spellcasting-api        # Express.js API server
 ├── libs
 │   ├── shared
 │   │   ├── util-interface      # Shared TypeScript interfaces and types
 │   │   └── util-spellcaster    # Core spellcasting logic
 │   └── spellcasting-sdk        # SDK for interacting with the API
 ```
+
+## Documentation
+
+API and SDK documentation can be found in the respective project directories.
+
+- [SpellCasting API Documentation](apps/spellcasting-api/README.md)
+- [SpellCasting SDK Documentation](libs/spellcasting-sdk/README.md)
 
 ## Getting Started
 
@@ -125,13 +132,6 @@ npx nx lint <project-name>
 - `npx nx graph`: Visually explore the project graph
 - `npx nx affected:graph`: See what's been affected by your changes
 - `npx nx show project <project-name>`: See available targets for a project
-
-## Documentation
-
-API and SDK documentation can be found in the respective project directories.
-
-- [SpellCasting API Documentation](apps/spellcasting-api/README.md)
-- [SpellCasting SDK Documentation](libs/spellcasting-sdk/README.md)
 
 ## Learn More About Nx
 
