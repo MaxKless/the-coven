@@ -1,18 +1,28 @@
 import { Recipe, Spell } from '@the-coven/util-interface';
 
+type CastFunction = (
+  spellId: string,
+  recipeId: string,
+  passphrase: string,
+  extraIngredients: string[],
+  extraIncantations: string[]
+) => Promise<string>;
+
 export class SpellCaster {
   private spell: Spell;
   private recipe: Recipe;
   private extraIngredients: string[] = [];
   private extraIncantations: string[] = [];
+  private castFunction: CastFunction;
 
-  constructor(spell: Spell, recipeId: string) {
+  constructor(spell: Spell, recipeId: string, castFunction: CastFunction) {
     this.spell = spell;
     const selectedRecipe = spell.recipes.find((r) => r.id === recipeId);
     if (!selectedRecipe) {
       throw new Error('Recipe not found for this spell.');
     }
     this.recipe = selectedRecipe;
+    this.castFunction = castFunction;
   }
 
   addExtraIngredient(ingredient: string): void {
@@ -23,25 +33,13 @@ export class SpellCaster {
     this.extraIncantations.push(incantation);
   }
 
-  cast(passphrase: string): string {
-    if (passphrase !== 'abracadabra') {
-      throw new Error('Invalid passphrase. Spell casting failed.');
-    }
-
-    const allIngredients = [
-      ...this.recipe.ingredients,
-      ...this.extraIngredients,
-    ];
-    const allIncantations = [
-      ...this.recipe.incantations,
-      ...this.extraIncantations,
-    ];
-
-    return (
-      `${this.spell.name} (${this.recipe.type}) cast successfully!\n` +
-      `Recipe Used: ${this.recipe.id}\n` +
-      `Ingredients used: ${allIngredients.join(', ')}\n` +
-      `Incantations used: ${allIncantations.join(', ')}`
+  async cast(passphrase: string): Promise<string> {
+    return this.castFunction(
+      this.spell.id,
+      this.recipe.id,
+      passphrase,
+      this.extraIngredients,
+      this.extraIncantations
     );
   }
 }

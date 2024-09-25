@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@the-coven/util-interface": ["libs/shared/util-interface/src/index.ts"]
+      "@the-coven/util-interface": ["libs/shared/util-interface/src/index.ts"],
+      "@the-coven/util-spellcaster": [
+        "libs/shared/util-spellcaster/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
