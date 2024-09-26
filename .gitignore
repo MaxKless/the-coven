@@ -40,3 +40,9 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+.gradle
+.idea
+.intellijPlatform
+.qodana
+build
