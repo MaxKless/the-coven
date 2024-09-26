@@ -39,8 +39,9 @@ export function initSpellcastingView() {
 
 class SpellcastingTreeDataProvider implements TreeDataProvider<TreeItem> {
   getTreeItem(element: TreeItem): TreeItem | Thenable<TreeItem> {
-    throw new Error('Method not implemented.');
+    return element;
   }
+
   async getChildren(element?: TreeItem | undefined): Promise<TreeItem[]> {
     if (!element) {
       const data = await this.getSpellcastingData();
