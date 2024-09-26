@@ -7,6 +7,22 @@ export class SpellCastingSDK {
     this.baseUrl = baseUrl;
   }
 
+  async getAllIngedients(): Promise<string[]> {
+    const response = await fetch(`${this.baseUrl}/api/ingredients`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch ingredients');
+    }
+    return await response.json();
+  }
+
+  async getAllIncantations(): Promise<string[]> {
+    const response = await fetch(`${this.baseUrl}/api/incantations`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch incantations');
+    }
+    return await response.json();
+  }
+
   async getAllRecipes(): Promise<Recipe[]> {
     const response = await fetch(`${this.baseUrl}/api/recipes`);
     if (!response.ok) {

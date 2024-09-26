@@ -2,7 +2,12 @@ import express from 'express';
 
 import { Spell } from '@the-coven/util-interface';
 import { serverCastSpell } from './app/spell-cast.function';
-import { getAllRecipes, getRecipe } from './app/recipes.repository';
+import {
+  getAllIncantations,
+  getAllIngredients,
+  getAllRecipes,
+  getRecipe,
+} from './app/recipes.repository';
 
 const app = express();
 app.use(express.json());
@@ -10,6 +15,16 @@ app.use(express.json());
 app.get('/api/recipes', (req, res) => {
   const recipes = getAllRecipes();
   res.json(recipes);
+});
+
+app.get('/api/ingredients', (req, res) => {
+  const ingredients = getAllIngredients();
+  res.json(ingredients);
+});
+
+app.get('/api/incantations', (req, res) => {
+  const incantations = getAllIncantations();
+  res.json(incantations);
 });
 
 app.get('/api/recipes/:id', (req, res) => {

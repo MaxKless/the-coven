@@ -132,6 +132,22 @@ const recipes: Recipe[] = [
   },
 ];
 
+export const getAllIngredients = () => {
+  const ingredients = new Set<string>();
+  recipes.forEach((recipe) => {
+    recipe.ingredients.forEach((ingredient) => ingredients.add(ingredient));
+  });
+  return Array.from(ingredients);
+};
+
+export const getAllIncantations = () => {
+  const incantations = new Set<string>();
+  recipes.forEach((recipe) => {
+    recipe.incantations.forEach((incantation) => incantations.add(incantation));
+  });
+  return Array.from(incantations);
+};
+
 export const getAllRecipes = () => recipes;
 export const getRecipe = (id: string) =>
   recipes.find((recipe) => recipe.id === id);
