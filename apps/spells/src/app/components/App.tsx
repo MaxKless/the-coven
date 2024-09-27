@@ -5,8 +5,9 @@ import Toast from './Toast';
 import CustomSpellCreator from './CustomSpellCreator';
 import styles from '../styles/App.module.css';
 
-// Initialize the SDK with the correct base URL
-const spellCastingSDK = new SpellCastingSDK('https://the-coven.vercel.app');
+const spellCastingSDK = new SpellCastingSDK(
+  process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://the-coven.vercel.app'
+);
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
