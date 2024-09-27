@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from './Toast.module.css';
+import styles from './toast.module.css';
 
 interface ToastProps {
   title: string;
