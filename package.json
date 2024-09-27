@@ -6,6 +6,9 @@
     "build": "npx nx build spellcasting-api --prod",
     "start": "npx nx serve spellcasting-api --prod"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "main": "dist/apps/spellcasting-api/main.js",
   "private": true,
   "dependencies": {
