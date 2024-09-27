@@ -51,6 +51,15 @@
         "serveStaticTargetName": "serve-static",
         "typecheckTargetName": "typecheck"
       }
+    },
+    {
+      "plugin": "@nx/next/plugin",
+      "options": {
+        "startTargetName": "start",
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "serveStaticTargetName": "serve-static"
+      }
     }
   ],
   "nxCloudUrl": "https://staging.nx.app",
@@ -66,6 +75,12 @@
         "style": "css"
       },
       "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    },
+    "@nx/next": {
+      "application": {
         "style": "css",
         "linter": "eslint"
       }
