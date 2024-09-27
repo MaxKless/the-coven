@@ -1,29 +1,29 @@
-const copyPlugin = require("esbuild-plugin-copy");
-const esbuild = require("esbuild");
+const copyPlugin = require('esbuild-plugin-copy');
+const esbuild = require('esbuild');
 
-const production = process.argv.includes("--production");
-const watch = process.argv.includes("--watch");
+const production = process.argv.includes('--production');
+const watch = process.argv.includes('--watch');
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: ["src/extension.ts"],
+    entryPoints: ['src/extension.ts'],
     bundle: true,
-    format: "cjs",
+    format: 'cjs',
     minify: production,
     sourcemap: !production,
     sourcesContent: false,
-    platform: "node",
-    outfile: "dist/extension.js",
-    external: ["vscode"],
-    logLevel: "silent",
+    platform: 'node',
+    outfile: '../../dist/apps/codex-arcana-vscode/extension.js',
+    external: ['vscode'],
+    logLevel: 'silent',
     plugins: [
       copyPlugin.copy({
         // this is equal to process.cwd(), which means we use cwd path as base path to resolve `to` path
         // if not specified, this plugin uses ESBuild.build outdir/outfile options as base path.
-        resolveFrom: "cwd",
+        resolveFrom: 'cwd',
         assets: {
-          from: ["./package.json"],
-          to: ["./dist/package.json"],
+          from: ['./package.json'],
+          to: ['../../dist/apps/codex-arcana-vscode/package.json'],
         },
         watch,
       }),
