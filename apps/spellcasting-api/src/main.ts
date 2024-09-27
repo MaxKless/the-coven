@@ -1,5 +1,4 @@
 import express from 'express';
-
 import { Spell } from '@the-coven/util-interface';
 import { serverCastSpell } from './app/spell-cast.function';
 import {
@@ -11,6 +10,11 @@ import {
 
 const app = express();
 app.use(express.json());
+
+// Add a root route
+app.get('/', (req, res) => {
+  res.send('Welcome to the Spellcasting API!');
+});
 
 app.get('/api/recipes', (req, res) => {
   const recipes = getAllRecipes();
@@ -55,7 +59,8 @@ app.post('/api/cast-spell', (req, res) => {
   }
 });
 
-const port = 3000;
+// Use the PORT environment variable provided by Heroku
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on port ${port}`);
 });
