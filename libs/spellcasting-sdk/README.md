@@ -36,7 +36,7 @@ import { SpellCastingSDK, spellCastingSDK, Recipe, Spell, SpellType } from '@the
 You can use the pre-configured `spellCastingSDK` instance with relative paths, or create a new instance with a custom base URL:
 
 ```typescript
-const customSDK = new SpellCastingSDK('https://api.spellcasting.com');
+const customSDK = new SpellCastingSDK('https://the-coven.vercel.app');
 ```
 
 ## API Reference
