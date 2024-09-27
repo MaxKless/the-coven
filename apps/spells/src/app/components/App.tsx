@@ -1,9 +1,12 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { spellCastingSDK, Recipe } from '@the-coven/spellcasting-sdk';
+import { SpellCastingSDK, type Recipe } from '@the-coven/spellcasting-sdk';
 import Toast from './Toast';
 import CustomSpellCreator from './CustomSpellCreator';
 import styles from '../styles/App.module.css';
+
+// Initialize the SDK with the correct base URL
+const spellCastingSDK = new SpellCastingSDK('https://the-coven.vercel.app');
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
