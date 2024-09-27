@@ -1,7 +1,24 @@
 {
   "name": "@the-coven/spellcasting-sdk",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "dependencies": {},
   "type": "commonjs",
-  "main": "./index.cjs"
+  "description": "A TypeScript SDK for interacting with magical spells and recipes",
+  "main": "./index.cjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MaxKless/the-coven"
+  },
+  "keywords": [
+    "nx",
+    "sdk",
+    "spells",
+    "magic",
+    "typescript"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MaxKless/the-coven/issues"
+  },
+  "homepage": "https://github.com/MaxKless/the-coven/blob/main/libs/spellcasting-sdk/README.md"
 }
