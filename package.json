@@ -2,7 +2,11 @@
   "name": "@the-coven/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "build": "npx nx build spellcasting-api --prod",
+    "start": "npx nx serve spellcasting-api --prod"
+  },
+  "main": "dist/apps/spellcasting-api/main.js",
   "private": true,
   "dependencies": {
     "@the-coven/spellcasting-sdk": "^1.0.1",
