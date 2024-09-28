@@ -29,7 +29,7 @@ const App: React.FC = () => {
   } | null>(null);
   const [recentSpells, setRecentSpells] = useState<Spell[]>([]);
 
-  const socket = usePartySocket({
+  usePartySocket({
     host: PARTYKIT_HOST,
     room: 'spells',
     onMessage(event: MessageEvent) {
@@ -85,13 +85,37 @@ const App: React.FC = () => {
 
     try {
       const spell = Spell.fromRecipe(selectedRecipe);
-      await spellCastingSDK.castSpell(spell, 'abracadabra');
-      try {
-        await socket.send(JSON.stringify({ type: 'cast_spell', spell }));
-      } catch (error) {
-        console.error('Error sending spell to PartyKit server:', error);
+      const spellData = {
+        spell: {
+          name: spell.name,
+          type: spell.type,
+          ingredients: spell.ingredients,
+          incantations: spell.incantations,
+        },
+        passphrase: 'abracadabra',
+      };
+
+      console.log('Casting spell:', JSON.stringify(spellData, null, 2));
+
+      const response = await fetch('/api/cast-spell', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(spellData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error);
       }
+
+      const result = await response.json();
+      console.log('Spell cast successfully:', result.message);
+
+      // Handle successful spell cast...
     } catch (error) {
+      console.error('Error in castSpell:', error);
       setToastData({
         title: ':🧙‍♀️: :🌙: Spell Casting Failed',
         message: [
