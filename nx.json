@@ -60,14 +60,6 @@
         "devTargetName": "dev",
         "serveStaticTargetName": "serve-static"
       }
-    },
-    {
-      "plugin": "@nx/gradle",
-      "options": {
-        "testTargetName": "test",
-        "classesTargetName": "classes",
-        "buildTargetName": "build"
-      }
     }
   ],
   "nxCloudUrl": "https://staging.nx.app",
