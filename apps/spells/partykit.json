@@ -1,0 +1,6 @@
+{
+  "$schema": "https://www.partykit.io/schema.json",
+  "name": "the-coven-source-party",
+  "main": "server.ts",
+  "compatibilityDate": "2024-09-27"
+}

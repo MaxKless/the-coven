@@ -47,3 +47,5 @@ out
 
 # environments
 .env
+
+.partykit

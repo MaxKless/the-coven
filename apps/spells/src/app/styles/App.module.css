@@ -1,28 +1,30 @@
 .appContainer {
   font-family: 'Garamond', serif;
-  background-color: #0a0a0a;
   color: #f8f8f2;
-  max-width: 60vw;
+  max-width: 90vw;
   margin: 20px auto;
   padding: 20px;
-  border: 1px solid #4e3b66;
+  border: 1px solid #6272a4;
   border-radius: 8px;
+  background-color: #282a36; /* Slightly lighter than the body for contrast */
 }
 
 .title {
   color: #ff5555;
   text-align: center;
+  font-size: 1.8rem;
 }
 
 .spellList {
   display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
 .spellListContainer,
 .selectedSpellContainer {
   flex: 1;
-  background-color: #22212c;
+  background-color: #44475a;
   padding: 10px;
   border-radius: 8px;
 }
@@ -37,7 +39,7 @@
   padding: 10px;
   border: 1px solid #50fa7b;
   margin-bottom: 5px;
-  background-color: transparent;
+  background-color: #282a36;
   transition: background-color 0.3s, color 0.3s;
 }
 
@@ -59,7 +61,7 @@
   padding: 10px;
   margin-top: 10px;
   background-color: #ff5555;
-  color: #fff;
+  color: #f8f8f2;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -68,4 +70,45 @@
 
 .castButton:hover {
   background-color: #ff79c6;
+}
+
+.customSpellCreator {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.customSpellCreator input,
+.customSpellCreator select,
+.customSpellCreator button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #6272a4;
+  background-color: #44475a;
+  color: #f8f8f2;
+}
+
+.customSpellCreator button {
+  background-color: #ff5555;
+  cursor: pointer;
+}
+
+.customSpellCreator button:hover {
+  background-color: #ff79c6;
+}
+
+@media (min-width: 768px) {
+  .appContainer {
+    max-width: 60vw;
+  }
+
+  .spellList {
+    flex-direction: row;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
 }

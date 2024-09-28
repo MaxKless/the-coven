@@ -1,13 +1,24 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { SpellCastingSDK, type Recipe } from '@the-coven/spellcasting-sdk';
+import { SpellCastingSDK, SpellType } from '@the-coven/spellcasting-sdk';
+import { Spell, Recipe } from '@the-coven/spellcasting-sdk';
 import Toast from './Toast';
 import CustomSpellCreator from './CustomSpellCreator';
 import styles from '../styles/App.module.css';
+import usePartySocket from 'partysocket/react';
 
 const spellCastingSDK = new SpellCastingSDK(
   process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://the-coven.vercel.app'
 );
+
+const PARTYKIT_HOST = process.env.NEXT_PUBLIC_PARTYKIT_HOST ?? 'localhost:1999';
+
+interface RawSpellData {
+  _name: string;
+  _type: SpellType;
+  _ingredients: string[];
+  _incantations: string[];
+}
 
 const App: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -16,6 +27,47 @@ const App: React.FC = () => {
     title: string;
     message: string[];
   } | null>(null);
+  const [recentSpells, setRecentSpells] = useState<Spell[]>([]);
+
+  const socket = usePartySocket({
+    host: PARTYKIT_HOST,
+    room: 'spells',
+    onMessage(event: MessageEvent) {
+      const data = JSON.parse(event.data);
+      if (data.type === 'init') {
+        setRecentSpells(
+          (data.spells as RawSpellData[]).map(
+            (spellData) =>
+              new Spell(
+                spellData._name,
+                spellData._type,
+                spellData._ingredients,
+                spellData._incantations
+              )
+          )
+        );
+      } else if (data.type === 'new_spell') {
+        console.log('Received message:', data);
+        const newSpell = new Spell(
+          (data.spell as RawSpellData)._name,
+          (data.spell as RawSpellData)._type,
+          (data.spell as RawSpellData)._ingredients,
+          (data.spell as RawSpellData)._incantations
+        );
+        console.log('New spell:', newSpell);
+        setToastData({
+          title: `:🎃: :✨: ${newSpell.name} (${newSpell.type}) cast successfully!`,
+          message: [
+            `Ingredients used: ${newSpell.ingredients.join(', ')}`,
+            `Incantations used: ${newSpell.incantations.join(', ')}`,
+          ],
+        });
+        setRecentSpells((prevSpells) => {
+          return [...prevSpells, newSpell].reverse().slice(0, 5);
+        });
+      }
+    },
+  });
 
   useEffect(() => {
     spellCastingSDK
@@ -32,16 +84,13 @@ const App: React.FC = () => {
     if (!selectedRecipe) return;
 
     try {
-      const spell = spellCastingSDK.createSpellFromRecipe(selectedRecipe);
-      const result = await spellCastingSDK.castSpell(spell, 'abracadabra');
-      const resultLines = result
-        .split('\n')
-        .filter((line) => line.trim() !== '');
-
-      setToastData({
-        title: `:🎃: :✨: ${resultLines[0]}`,
-        message: resultLines.slice(1),
-      });
+      const spell = Spell.fromRecipe(selectedRecipe);
+      await spellCastingSDK.castSpell(spell, 'abracadabra');
+      try {
+        await socket.send(JSON.stringify({ type: 'cast_spell', spell }));
+      } catch (error) {
+        console.error('Error sending spell to PartyKit server:', error);
+      }
     } catch (error) {
       setToastData({
         title: ':🧙‍♀️: :🌙: Spell Casting Failed',
@@ -75,39 +124,6 @@ const App: React.FC = () => {
         </span>
       </h1>
       <div className={styles.spellList}>
-        <div className={styles.spellListContainer}>
-          <h2>
-            <span role="img" aria-label="Autumn leaf">
-              🍂
-            </span>{' '}
-            Autumn Recipes{' '}
-            <span role="img" aria-label="Maple leaf">
-              🍁
-            </span>
-          </h2>
-          <ul className={styles.recipeItemList}>
-            {recipes.map((recipe) => (
-              <li
-                key={recipe.id}
-                onClick={() => handleRecipeClick(recipe)}
-                className={`${styles.spellItem} ${
-                  selectedRecipe && selectedRecipe.id === recipe.id
-                    ? styles.selected
-                    : ''
-                }`}
-              >
-                <span role="img" aria-label="Crystal ball">
-                  🔮
-                </span>{' '}
-                {recipe.name}{' '}
-                <span role="img" aria-label="Magic wand">
-                  🪄
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         <div className={styles.selectedSpellContainer}>
           <h2>
             <span role="img" aria-label="Crescent moon">
@@ -124,7 +140,7 @@ const App: React.FC = () => {
                 <span role="img" aria-label="Evil eye amulet">
                   🧿
                 </span>{' '}
-                {selectedRecipe.name}{' '}
+                {selectedRecipe.name}
               </h3>
               <p>
                 <strong>Type:</strong> {selectedRecipe.type}
@@ -162,7 +178,50 @@ const App: React.FC = () => {
             </p>
           )}
         </div>
+        <div className={styles.spellListContainer}>
+          <h2>
+            <span role="img" aria-label="Autumn leaf">
+              🍂
+            </span>{' '}
+            Autumn Recipes{' '}
+            <span role="img" aria-label="Maple leaf">
+              🍁
+            </span>
+          </h2>
+          <ul className={styles.recipeItemList}>
+            {recipes.map((recipe) => (
+              <li
+                key={recipe.id}
+                onClick={() => handleRecipeClick(recipe)}
+                className={`${styles.spellItem} ${
+                  selectedRecipe && selectedRecipe.id === recipe.id
+                    ? styles.selected
+                    : ''
+                }`}
+              >
+                <span role="img" aria-label="Crystal ball">
+                  🔮
+                </span>{' '}
+                {recipe.name}{' '}
+                <span role="img" aria-label="Magic wand">
+                  🪄
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+
+      {/* <div className={styles.recentSpells}>
+        <h2>Recently Cast Spells</h2>
+        <ul>
+          {recentSpells.map((spell, index) => (
+            <li key={index}>
+              {spell.name} ({spell.type})
+            </li>
+          ))}
+        </ul>
+      </div> */}
 
       <CustomSpellCreator setToastData={setToastData} />
     </div>
