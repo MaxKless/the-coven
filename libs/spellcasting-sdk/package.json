@@ -1,6 +1,6 @@
 {
   "name": "@the-coven/spellcasting-sdk",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "dependencies": {},
   "type": "commonjs",
   "description": "A TypeScript SDK for interacting with magical spells and recipes",

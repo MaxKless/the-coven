@@ -46,10 +46,12 @@ export class SpellCastingSDK {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: spell.name,
-        type: spell.type,
-        ingredients: spell.ingredients,
-        incantations: spell.incantations,
+        spell: {
+          name: spell.name,
+          type: spell.type,
+          ingredients: spell.ingredients,
+          incantations: spell.incantations,
+        },
         passphrase,
       }),
     });
