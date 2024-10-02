@@ -2,6 +2,8 @@ import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 
+layout.buildDirectory = file("../../dist/apps/codex-arcana-jetbrains")
+
 plugins {
     id("java") // Java support
     alias(libs.plugins.kotlin) // Kotlin support
@@ -133,6 +135,7 @@ tasks {
     publishPlugin {
         dependsOn(patchChangelog)
     }
+
 }
 
 intellijPlatformTesting {
@@ -156,12 +159,14 @@ intellijPlatformTesting {
     }
 }
 
-allprojects {
+
+allprojects {
   apply {
       plugin("project-report")
   }
 }
-tasks.register("projectReportAll") {
+
+tasks.register("projectReportAll") {
     // All project reports of subprojects
     allprojects.forEach {
         dependsOn(it.tasks.get("projectReport"))
