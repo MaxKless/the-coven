@@ -26,6 +26,9 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
+    },
+    "lint": {
+      "cache": true
     }
   },
   "plugins": [
