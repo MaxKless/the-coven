@@ -127,6 +127,19 @@ const App: React.FC = () => {
 
   return (
     <div className={styles.appContainer}>
+      <div className={styles.githubLink}>
+        <a
+          href="https://github.com/MaxKless/the-coven"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span role="img" aria-label="GitHub">
+            🐙🐈
+          </span>{' '}
+          View on GitHub
+        </a>
+      </div>
+
       {toastData && (
         <Toast
           title={toastData.title}

@@ -112,3 +112,28 @@
     font-size: 2.5rem;
   }
 }
+
+.githubLink {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #24292e;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.githubLink a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.githubLink:hover {
+  background-color: #2c974b;
+}
