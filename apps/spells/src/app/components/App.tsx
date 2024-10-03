@@ -6,6 +6,7 @@ import Toast from './Toast';
 import CustomSpellCreator from './CustomSpellCreator';
 import styles from '../styles/App.module.css';
 import usePartySocket from 'partysocket/react';
+import SparkleEffect from './SparkleEffect';
 
 const spellCastingSDK = new SpellCastingSDK(
   process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://the-coven.vercel.app'
@@ -28,6 +29,7 @@ const App: React.FC = () => {
     message: string[];
   } | null>(null);
   const [recentSpells, setRecentSpells] = useState<Spell[]>([]);
+  const [sparkles, setSparkles] = useState<{ id: number; name: string }[]>([]);
 
   usePartySocket({
     host: PARTYKIT_HOST,
@@ -65,6 +67,15 @@ const App: React.FC = () => {
         setRecentSpells((prevSpells) => {
           return [...prevSpells, newSpell].reverse().slice(0, 5);
         });
+        setSparkles((prev) => [
+          ...prev,
+          { id: Date.now(), name: newSpell.name },
+        ]);
+        setTimeout(() => {
+          setSparkles((prev) =>
+            prev.filter((sparkle) => sparkle.id !== Date.now())
+          );
+        }, 2000);
       }
     },
   });
@@ -140,13 +151,17 @@ const App: React.FC = () => {
         </a>
       </div>
 
-      {toastData && (
+      {sparkles.map((sparkle) => (
+        <SparkleEffect key={sparkle.id} spellName={sparkle.name} />
+      ))}
+
+      {/* {toastData && (
         <Toast
           title={toastData.title}
           message={toastData.message}
           onClose={() => setToastData(null)}
         />
-      )}
+      )} */}
 
       <h1 className={styles.title}>
         <span role="img" aria-label="Witch">
