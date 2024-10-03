@@ -1,4 +1,4 @@
-# The Coven - Your SpellCasting companion
+# The Coven - Your SpellCasting Companion
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
@@ -13,12 +13,12 @@ This Nx workspace is organized into the following apps and libraries:
 ```tree
 .
 ├── apps
-│   ├── spell-playground        # React.js client application
-│   └── spellcasting-api        # Express.js API server
+│   ├── codex-arcana-jetbrains  # JetBrains IDE plugin
+│   ├── codex-arcana-vscode     # Visual Studio Code extension
+│   └── spells                  # Next.js application for spellcasting
 ├── libs
 │   ├── shared
-│   │   ├── util-interface      # Shared TypeScript interfaces and types
-│   │   └── util-spellcaster    # Core spellcasting logic
+│   │   └── util-interface      # Shared TypeScript interfaces and types
 │   └── spellcasting-sdk        # SDK for interacting with the API
 ```
 
@@ -26,7 +26,7 @@ This Nx workspace is organized into the following apps and libraries:
 
 API and SDK documentation can be found in the respective project directories.
 
-- [SpellCasting API Documentation](apps/spellcasting-api/README.md)
+- [Spells API Documentation](apps/spells/README.md)
 - [SpellCasting SDK Documentation](libs/spellcasting-sdk/README.md)
 
 ## Getting Started
@@ -35,6 +35,8 @@ API and SDK documentation can be found in the respective project directories.
 
 - Node.js (v18 or later)
 - npm or Yarn or pnpm
+- JetBrains IDE (for the JetBrains plugin)
+- Visual Studio Code (for the VS Code extension)
 
 ### Installation
 
@@ -53,36 +55,37 @@ API and SDK documentation can be found in the respective project directories.
 
 ### Running the Project
 
-1. Start the API server:
+1. Start the spells application:
 
    ```bash
-   npx nx serve spellcasting-api
+   npx nx serve spells
    ```
 
-2. In a new terminal, start the client application:
+2. In a new terminal window, go to the spells directory and run partykit:
 
    ```bash
-   npx nx serve spell-playground
+   cd apps/spells
+   npx partykit dev
    ```
 
-3. Open your browser and navigate to `http://localhost:4200` to view the application.
+3. Open your browser and navigate to `http://localhost:3000` to view the application.
 
 ## Development
 
-### API Server (apps/spellcasting-api)
+### JetBrains Plugin (apps/codex-arcana-jetbrains)
 
-To run the API server in development mode:
+To build the JetBrains plugin:
 
 ```bash
-npx nx serve spellcasting-api
+npx nx build codex-arcana-jetbrains
 ```
 
-### Client Application (apps/spell-playground)
+### VS Code Extension (apps/codex-arcana-vscode)
 
-To run the client in development mode:
+To build the VS Code extension:
 
 ```bash
-npx nx serve spell-playground
+npx nx build codex-arcana-vscode
 ```
 
 ### Building Projects
@@ -96,7 +99,7 @@ npx nx build <project-name>
 For example:
 
 ```bash
-npx nx build spellcasting-api
+npx nx build spells
 ```
 
 ### Running Tests
@@ -150,3 +153,12 @@ Join the Nx community:
 - [Discord](https://go.nx.dev/community)
 - [Twitter](https://twitter.com/nxdevtools)
 - [YouTube Channel](https://www.youtube.com/@nxdevtools)
+
+## Additional Information
+
+- The project uses [PartyKit](https://www.partykit.io/) for real-time functionality. See [`partykit.json`](apps/spells/partykit.json) and [`server.ts`](apps/spells/README.md) in the spells app for configuration.
+- The `spells` application uses Next.js and includes [API routes](apps/spells/src/app/api) for spell casting, ingredients, incantations, and recipes.
+- The project includes ESLint configurations for code linting.
+- Jest and Vitest are set up for testing.
+- The `libs/shared/util-interface` contains shared TypeScript interfaces and types used across the project.
+- The `libs/spellcasting-sdk` provides a convenient SDK for interacting with the spellcasting API.

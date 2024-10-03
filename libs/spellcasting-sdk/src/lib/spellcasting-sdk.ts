@@ -7,7 +7,7 @@ export class SpellCastingSDK {
     this.baseUrl = baseUrl;
   }
 
-  async getAllIngedients(): Promise<string[]> {
+  async getAllIngredients(): Promise<string[]> {
     const response = await fetch(`${this.baseUrl}/api/ingredients`);
     if (!response.ok) {
       throw new Error('Failed to fetch ingredients');

@@ -65,7 +65,7 @@ The main class that provides methods for interacting with the SpellCasting API.
 
 - `castSpell(spell: Spell, passphrase: string): Promise<string>`
 
-  - Casts a spell and returns the result.
+  - Casts a spell and returns the result message.
 
 - `createSpell(name: string, type: SpellType, ingredients: string[], incantations: string[]): Spell`
 
