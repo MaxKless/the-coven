@@ -1,0 +1,11 @@
+{
+  "implicitDependencies": ["codex-arcana-language-server"],
+  "targets": {
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "runIde": {
+      "dependsOn": ["^build"]
+    }
+  }
+}

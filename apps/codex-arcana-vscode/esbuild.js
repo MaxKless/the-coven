@@ -28,6 +28,10 @@ async function main() {
         {
           from: ['./assets/**/*',],
           to: ['../../dist/apps/codex-arcana-vscode/assets'],
+        },
+        {
+          from: ["../../dist/apps/codex-arcana-language-server/**/*"],
+          to: ["../../dist/apps/codex-arcana-vscode/language-server"]
         }
         ],
         watch,

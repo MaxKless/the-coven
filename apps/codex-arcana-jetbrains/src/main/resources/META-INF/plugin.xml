@@ -12,6 +12,7 @@
         <notificationGroup displayType="STICKY_BALLOON" id="Codex Arcana"></notificationGroup>
 
        <toolWindow factoryClass="com.thecoven.codexarcana.toolwindow.CodexArcanaToolwindowFactory" id="CAToolwindow"/>
+      <platform.lsp.serverSupportProvider implementation="com.thecoven.codexarcana.language_server.LanguageServerSupportProvider"/>
 
     </extensions>
 

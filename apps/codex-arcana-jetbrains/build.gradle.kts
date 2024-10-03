@@ -148,6 +148,12 @@ tasks {
     dependsOn(patchChangelog)
   }
 
+  prepareSandbox {
+    from(file("../../dist/apps/codex-arcana-language-server")) {
+      include("**/*.js")
+      into(intellijPlatform.projectName.map { "$it/language-server"}.get())
+    }
+  }
 }
 
 intellijPlatformTesting {

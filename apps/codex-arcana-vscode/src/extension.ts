@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { SpellcastingOverviewTreeDataProvider } from './spellcasting-overview';
+import { initLanguageClient } from './language-client';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -35,6 +36,8 @@ export function activate(context: vscode.ExtensionContext) {
     'spellcasting-overview',
     new SpellcastingOverviewTreeDataProvider()
   );
+
+  initLanguageClient(context);
 
   context.subscriptions.push(disposable);
 }
