@@ -12,6 +12,7 @@ export class Spell {
     ingredients: string[] = [],
     incantations: string[] = []
   ) {
+    // some comment to trigger change
     this._ingredients = ingredients;
     this._incantations = incantations;
     this._name = name;
