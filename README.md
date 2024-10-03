@@ -6,6 +6,8 @@ Welcome to The Coven's SpellCasting Companion, an Nx-powered monorepo for managi
 
 This project is created for the purpose of the [Squiggle Conf 2024](https://2024.squiggleconf.com/) workshop [_Build Editor Extensions with the Makers of Nx Console_](https://2024.squiggleconf.com/sessions#workshop-katerina-and-max).
 
+You can see it live at [the-coven.vercel.app](https://the-coven.vercel.app/).
+
 ## Project Structure
 
 This Nx workspace is organized into the following apps and libraries:
