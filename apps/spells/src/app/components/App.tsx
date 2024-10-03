@@ -8,9 +8,7 @@ import styles from '../styles/App.module.css';
 import usePartySocket from 'partysocket/react';
 import SparkleEffect from './SparkleEffect';
 
-const spellCastingSDK = new SpellCastingSDK(
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? 'https://the-coven.vercel.app'
-);
+const spellCastingSDK = new SpellCastingSDK();
 
 const PARTYKIT_HOST = process.env.NEXT_PUBLIC_PARTYKIT_HOST ?? 'localhost:1999';
 
