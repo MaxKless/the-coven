@@ -145,8 +145,10 @@ npx nx lint <project-name>
 
 ### Max & Katerina links
 
-- [Max's X](https://x.com/MaxKless)
-- [Katerina's X](https://x.com/psybercity)
+- [Max's twitter](https://x.com/MaxKless)
+- [Max's github](https://github.com/MaxKless)
+- [Katerina's twitter](https://x.com/psybercity)
+- [Katerina's github](https://github.com/mandarini)
 
 ## Community
 
