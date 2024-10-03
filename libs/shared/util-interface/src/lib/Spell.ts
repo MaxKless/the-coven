@@ -19,6 +19,7 @@ export class Spell {
   }
 
   static fromRecipe(recipe: Recipe): Spell {
+    // some comment
     return new Spell(
       recipe.name,
       recipe.type,
