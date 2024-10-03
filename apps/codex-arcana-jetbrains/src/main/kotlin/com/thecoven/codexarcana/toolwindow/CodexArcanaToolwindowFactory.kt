@@ -13,9 +13,14 @@ import com.intellij.ui.content.ContentFactory
 import com.intellij.ui.treeStructure.SimpleTree
 import com.intellij.ui.treeStructure.SimpleTreeStructure
 import com.thecoven.codexarcana.util.PluginCoroutine
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.Json
 import javax.swing.tree.TreeSelectionModel
 
 
@@ -27,7 +32,21 @@ class CodexArcanaToolwindowFactory : ToolWindowFactory, DumbAware {
         val content = ContentFactory.getInstance().createContent(treeComponent, null, false)
         toolWindow.contentManager.addContent(content)
 
-        // TODO: Load data from API
+        PluginCoroutine.getInstance(project).scope.launch {
+          val httpClient = HttpClient(CIO)
+          val json = Json {
+            ignoreUnknownKeys = true
+          }
+
+          val ingredients = json.decodeFromString<Array<String>>(httpClient.get("https://the-coven.vercel.app/api/ingredients").bodyAsText())
+          val incantations = json.decodeFromString<Array<String>>(httpClient.get("https://the-coven.vercel.app/api/incantations").bodyAsText())
+          val recipes = json.decodeFromString<Array<Recipe>>(httpClient.get("https://the-coven.vercel.app/api/recipes").bodyAsText())
+
+          val data = SpellcastingData(ingredients, incantations, recipes)
+          withContext(Dispatchers.EDT) {
+            treeStructure.loadData(data)
+          }
+        }
     }
 
     override fun shouldBeAvailable(project: Project) = true

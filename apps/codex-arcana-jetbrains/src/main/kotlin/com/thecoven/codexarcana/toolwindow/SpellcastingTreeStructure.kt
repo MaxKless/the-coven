@@ -46,43 +46,59 @@ abstract class CodexArcanaNode(parent: CodexArcanaNode?) : CachingSimpleNode(par
 
     class RootNode(val data: SpellcastingData) : CodexArcanaNode(null) {
         override fun buildChildren(): Array<SimpleNode> {
-            TODO("Not yet implemented")
+            return arrayOf(
+              IngredientsSectionNode(data.ingredients, this),
+              IncantationsSectionNode(data.incantations, this),
+              RecipesSectionNode(data.recipes, this)
+            )
         }
     }
 
     class IngredientsSectionNode(val data: Array<String>, parent: CodexArcanaNode) : CodexArcanaNode(parent) {
         override fun buildChildren(): Array<SimpleNode> {
-            TODO("Not yet implemented")
+            return data.map { IngredientNode(it, this) }.toTypedArray()
         }
+
+      override fun getName() = "Ingredients"
     }
 
     class IncantationsSectionNode(val data: Array<String>, parent: CodexArcanaNode) : CodexArcanaNode(parent) {
         override fun buildChildren(): Array<SimpleNode> {
-            TODO("Not yet implemented")
+            return data.map { IncantationNode(it, this) }.toTypedArray()
         }
+
+      override fun getName() = "Incantations"
     }
 
     class RecipesSectionNode(val data: Array<Recipe>, parent: CodexArcanaNode) : CodexArcanaNode(parent) {
         override fun buildChildren(): Array<SimpleNode> {
-            TODO("Not yet implemented")
+            return data.map { RecipeNode(it, this) }.toTypedArray()
         }
+
+      override fun getName() = "Recipes"
     }
 
     class IngredientNode(val data: String, parent: CodexArcanaNode) : CodexArcanaNode(parent) {
         override fun buildChildren(): Array<SimpleNode> {
-            TODO("Not yet implemented")
+            return emptyArray()
         }
+
+      override fun getName() = data
     }
 
     class IncantationNode(val data: String, parent: CodexArcanaNode) : CodexArcanaNode(parent) {
         override fun buildChildren(): Array<SimpleNode> {
-            TODO("Not yet implemented")
+            return emptyArray()
         }
+
+      override fun getName() = data
     }
 
     class RecipeNode(val data: Recipe, parent: CodexArcanaNode) : CodexArcanaNode(parent) {
-        override fun buildChildren(): Array<SimpleNode> {
-            TODO("Not yet implemented")
+        override fun buildChildren(): Array<CodexArcanaNode> {
+            return data.ingredients.map { IngredientNode(it, this) }.toTypedArray<CodexArcanaNode>() + data.incantations.map { IncantationNode(it, this) }.toTypedArray<CodexArcanaNode>()
         }
+
+      override fun getName() = data.name
     }
 }
