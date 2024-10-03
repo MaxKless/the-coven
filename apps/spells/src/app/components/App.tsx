@@ -249,16 +249,17 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* <div className={styles.recentSpells}>
+      <div className={styles.recentSpells}>
         <h2>Recently Cast Spells</h2>
         <ul>
           {recentSpells.map((spell, index) => (
             <li key={index}>
-              {spell.name} ({spell.type})
+              <span className={styles.spellName}>{spell.name}</span>
+              <span className={styles.spellType}>{spell.type}</span>
             </li>
           ))}
         </ul>
-      </div> */}
+      </div>
 
       <CustomSpellCreator setToastData={setToastData} />
     </div>
