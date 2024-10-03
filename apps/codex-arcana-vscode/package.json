@@ -16,8 +16,39 @@
       {
         "command": "codex-arcana-vscode.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "spellcasting.copy",
+        "title": "Copy",
+        "icon": "$(copy)"
       }
-    ]
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "spellcasting.copy",
+          "group": "inline",
+          "when": "view == spellcasting-overview"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codex-arcana",
+          "title": "Codex Arcana",
+          "icon": "resources/codex-arcana.svg"
+        }
+      ]
+    },
+    "views": {
+      "codex-arcana": [
+        {
+          "id": "spellcasting-overview",
+          "name": "Spellcasting Overview"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
