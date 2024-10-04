@@ -16,8 +16,22 @@
       {
         "command": "codex-arcana-vscode.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "codex-arcana-vscode.copy",
+        "title": "Copy",
+        "icon": "$(copy)"
       }
     ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "codex-arcana-vscode.copy",
+          "group": "inline",
+          "when": "view == spellcasting-overview"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         {
