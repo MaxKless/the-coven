@@ -113,6 +113,13 @@ intellijPlatform {
       recommended()
     }
   }
+
+  prepareSandbox {
+    from(file("../../dist/apps/codex-arcana-language-server")) {
+      include("**/*.js")
+      into(intellijPlatform.projectName.map { "$it/language-server"}.get())
+    }
+  }
 }
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin

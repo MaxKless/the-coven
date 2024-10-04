@@ -5,6 +5,8 @@
     <vendor>The Coven</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.ultimate</depends>
+    <depends>JavaScript</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup displayType="STICKY_BALLOON" id="Codex Arcana"></notificationGroup>

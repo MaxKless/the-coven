@@ -8,11 +8,6 @@ import com.intellij.lang.javascript.service.JSLanguageServiceUtil
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.platform.lsp.api.LspServerSupportProvider
-import com.intellij.platform.lsp.api.ProjectWideLspServerDescriptor
-import com.intellij.lang.typescript.lsp.JSLspServerDescriptor
-import com.intellij.lang.typescript.lsp.LspServerActivationRule
-import com.intellij.lang.typescript.lsp.LspServerDownloader
-import com.intellij.lang.typescript.lsp.LspServerPackageDescriptor
 import com.intellij.platform.lsp.api.LspServerDescriptor
 import com.intellij.util.application
 import java.io.File
