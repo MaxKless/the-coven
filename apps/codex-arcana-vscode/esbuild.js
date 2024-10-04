@@ -21,10 +21,15 @@ async function main() {
         // this is equal to process.cwd(), which means we use cwd path as base path to resolve `to` path
         // if not specified, this plugin uses ESBuild.build outdir/outfile options as base path.
         resolveFrom: 'cwd',
-        assets: {
-          from: ['./package.json'],
-          to: ['../../dist/apps/codex-arcana-vscode/package.json'],
+        assets: [{
+          from: ['./package.json',],
+          to: ['../../dist/apps/codex-arcana-vscode'],
         },
+        {
+          from: ['./assets/**/*',],
+          to: ['../../dist/apps/codex-arcana-vscode/assets'],
+        }
+        ],
         watch,
       }),
     ],
