@@ -23,7 +23,7 @@ async function main() {
         resolveFrom: 'cwd',
         assets: [{
           from: ['./package.json',],
-          to: ['../../dist/apps/codex-arcana-vscode'],
+          to: ['../../dist/apps/codex-arcana-vscode/package.json'],
         },
         {
           from: ['./assets/**/*',],

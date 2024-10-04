@@ -17,7 +17,24 @@
         "command": "codex-arcana-vscode.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codex-arcana",
+          "title": "Codex Arcana",
+          "icon": "assets/open-book.svg"
+        }
+      ]
+    },
+    "views": {
+      "codex-arcana": [
+        {
+          "id": "spellcasting-overview",
+          "name": "Spellcasting Overview"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
