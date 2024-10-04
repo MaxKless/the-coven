@@ -56,7 +56,25 @@ export class SpellcastingTreeDataProvider
     if (element.label === 'Recipes') {
       return this.recipes.map((recipe) => ({
         label: recipe.name,
+        contextValue: 'recipe',
+        collapsibleState: TreeItemCollapsibleState.Collapsed,
       }));
+    }
+    if (element.contextValue === 'recipe') {
+      const recipe = this.recipes.find(
+        (recipe) => recipe.name === element.label
+      );
+      if (!recipe) {
+        return [];
+      }
+      return [
+        ...recipe.ingredients.map((ingredient) => ({
+          label: ingredient,
+        })),
+        ...recipe.incantations.map((incantation) => ({
+          label: incantation,
+        })),
+      ];
     }
   }
 }
