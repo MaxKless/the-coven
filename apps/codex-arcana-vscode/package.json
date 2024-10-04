@@ -12,6 +12,15 @@
   "activationEvents": [],
   "main": "extension.js",
   "contributes": {
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "spellcasting.copy",
+          "group": "inline",
+          "when": "view == spellcasting-overview"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "codex-arcana-vscode.helloWorld",

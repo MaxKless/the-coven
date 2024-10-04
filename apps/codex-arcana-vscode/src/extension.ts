@@ -2,6 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { SpellcastingTreeDataProvider } from './data-provider';
+import { SpellcastingOverviewTreeDataProvider } from './spellcasting-overview';
+import { initLanguageClient } from './language-client';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -35,6 +37,20 @@ export function activate(context: vscode.ExtensionContext) {
       vscode.window.showInformationMessage('Sup, witches');
     }
   );
+
+  vscode.commands.registerCommand(
+    'spellcasting.copy',
+    (element: vscode.TreeItem) => {
+      vscode.env.clipboard.writeText(element.label?.toString() || '');
+    }
+  );
+
+  vscode.window.registerTreeDataProvider(
+    'spellcasting-overview',
+    new SpellcastingOverviewTreeDataProvider()
+  );
+
+  initLanguageClient(context);
 
   context.subscriptions.push(disposable);
 }
